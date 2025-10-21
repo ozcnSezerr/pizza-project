@@ -4,7 +4,7 @@ import FormHeader from "./components/FormHeader";
 import SuccessPage from "./components/SuccessPage";
 import "./App.css";
 import SiparisForm from "./components/SiparisForm";
-
+import MainPage from "./components/MainPage";
 function App() {
   const [count, setCount] = useState(0);
   return (
@@ -16,6 +16,9 @@ function App() {
         </Route>
         <Route path="/success">
           <SuccessPage />
+        </Route>
+        <Route path="/main">
+          <MainPage />
         </Route>
       </Switch>
     </Router>
