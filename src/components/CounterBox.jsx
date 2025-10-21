@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useHistory } from "react-router-dom";
 
 // Ana kapsayıcı
 const CounterContainer = styled.div`
@@ -43,9 +44,31 @@ const CounterDisplay = styled.span`
   border-left: none;
   border-right: none;
 `;
+const OrderButton = styled.button`
+  background-color: #fdc913;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e0b00d;
+  }
+`;
+const SubmitContainer = styled.div`
+  font
+  border: 1px solid #d9d9d9;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+`;
 
 export default function CounterBox() {
   const [count, setCount] = useState(0);
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push("/success");
+  };
 
   return (
     <>
@@ -64,16 +87,7 @@ export default function CounterBox() {
           -
         </CounterButton>
       </CounterContainer>
-      <div
-        className="pt-5"
-        style={{
-          border: "1px solid #D9D9D9",
-          borderRadius: "8px",
-          width: "340px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+      <SubmitContainer className="pt-5 rounded">
         <h5 className="ms-5 pb-3" style={{ fontWeight: "600" }}>
           Sipariş Toplamı
         </h5>
@@ -86,18 +100,14 @@ export default function CounterBox() {
         >
           Toplam <span style={{ marginLeft: "8rem" }}>110.50₺</span>
         </p>
-        <button
+        <OrderButton
+          onClick={handleClick}
           type="submit"
           className="py-3 border rounded"
-          style={{
-            backgroundColor: "#fdc913 ",
-            textTransform: "uppercase",
-            fontWeight: "600",
-          }}
         >
           Sipariş Ver
-        </button>
-      </div>
+        </OrderButton>
+      </SubmitContainer>
     </>
   );
 }

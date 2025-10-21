@@ -23,7 +23,7 @@
   height: 46px;
 }
 .form-header > p {
-  left: 29%;
+  left: 33%;
   top: 136px;
   position: absolute;
   color: white;
@@ -85,5 +85,6 @@ Form {
 .submit-section {
   display: flex;
   margin: 0 auto;
+  margin-bottom: 2rem;
   width: 532px;
 }
