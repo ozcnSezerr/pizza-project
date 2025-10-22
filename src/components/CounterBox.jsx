@@ -55,26 +55,21 @@ const OrderButton = styled.button`
   }
 `;
 const SubmitContainer = styled.div`
-  font
   border: 1px solid #d9d9d9;
   width: 340px;
   display: flex;
   flex-direction: column;
 `;
 
-export default function CounterBox() {
+export default function CounterBox({ price, addPrice, isDisable }) {
   const [count, setCount] = useState(0);
-  const history = useHistory();
-
-  const handleClick = () => {
-    history.push("/success");
-  };
 
   return (
     <>
       <CounterContainer>
         <CounterButton
           className="border rounded-start"
+          type="button"
           onClick={() => setCount(count + 1)}
         >
           +
@@ -82,7 +77,8 @@ export default function CounterBox() {
         <CounterDisplay>{count}</CounterDisplay>
         <CounterButton
           className="border rounded-end"
-          onClick={() => setCount(count - 1)}
+          type="button"
+          onClick={() => setCount(count > 0 ? count - 1 : 0)}
         >
           -
         </CounterButton>
@@ -92,16 +88,20 @@ export default function CounterBox() {
           Sipariş Toplamı
         </h5>
         <p className="ms-5" style={{ color: "#5F5F5F", fontWeight: "600" }}>
-          Seçimler <span style={{ marginLeft: "7.4rem" }}>25.00₺</span>
+          Seçimler{" "}
+          <span style={{ marginLeft: "7.4rem" }}>{addPrice * count}.00₺</span>
         </p>
         <p
           className="ms-5 mb-5"
           style={{ color: "#CE2829", fontWeight: "600" }}
         >
-          Toplam <span style={{ marginLeft: "8rem" }}>110.50₺</span>
+          Toplam{" "}
+          <span style={{ marginLeft: "8rem" }}>
+            {addPrice * count + price * count}₺
+          </span>
         </p>
         <OrderButton
-          onClick={handleClick}
+          disabled={!(isDisable && count > 0)}
           type="submit"
           className="py-3 border rounded"
         >

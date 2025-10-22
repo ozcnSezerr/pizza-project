@@ -8,39 +8,23 @@
   display: flex;
   justify-content: center;
 }
-.form-header {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  padding-top: 40px;
-  width: 100%;
-  height: 180px;
-  background-color: #ce2829;
-  margin-bottom: 2.5rem;
-}
-.form-header > img {
-  width: 360px;
-  height: 46px;
-}
-.form-header > p {
-  left: 33%;
-  top: 136px;
-  position: absolute;
-  color: white;
-}
+
 .form-prices {
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
+
 .form-content {
-  width: 532px;
+  width: 80%;
+  max-width: 532px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.6rem;
 }
+
 .form-content p {
   line-height: 28px;
   color: #5f5f5f;
@@ -61,30 +45,27 @@ input[type="checkbox"] {
 .form-wrapper {
   margin: 0 auto;
   display: flex;
-  width: 532px;
+  max-width: 532px;
+  width: 80%;
 }
 
 .radio-container .form-check {
   margin-bottom: 10px;
 }
-/* 
+
 Form {
   width: 100%;
-} */
+}
 
 .ingredients-section {
   width: 100%;
   margin-top: 3rem;
 }
 
-.check-box-container {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
 .submit-section {
   display: flex;
   margin: 0 auto;
   margin-bottom: 2rem;
-  width: 532px;
+  max-width: 532px;
+  width: 100%;
 }

@@ -1,9 +1,25 @@
-import { Form, FormGroup, Input, Label, Col, Row } from "reactstrap";
-import { useState } from "react";
+import {
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Col,
+  Row,
+  FormFeedback,
+} from "reactstrap";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FormContent from "./FormContent";
 import CheckBoxs from "./CheckBoxs";
 import CounterBox from "./CounterBox";
+import RadioButtons from "./RadioButtons";
+import styled from "styled-components";
+import axios from "axios";
+const AlertStar = styled.span`
+  color: red;
+  visibility: ${({ $visible }) => ($visible ? "visible" : "hidden")};
+`;
 
 const options = [
   "Pepperoni",
@@ -22,72 +38,182 @@ const options = [
   "Avokado",
 ];
 
-export default function SiparisForm() {
-  const [selected, setSelected] = useState([]);
+const radio = ["Küçük", "Orta", "Büyük"];
 
-  const handleChange = (option) => {
-    if (selected.includes(option)) {
-      setSelected(selected.filter((item) => item !== option));
-    } else {
-      setSelected([...selected, option]);
+export default function SiparisForm() {
+  const [formData, setFormData] = useState({
+    checkbox: [],
+    radio: "",
+    select: "",
+    name: "",
+    text: "",
+  });
+  const [errors, setErrors] = useState({
+    checkbox: false,
+    radio: false,
+    select: false,
+    name: false,
+  });
+  const [isValid, setIsValid] = useState(false);
+  const [price, setPrice] = useState(85.5);
+  const [addPrice, setAddPrice] = useState(0);
+
+  const history = useHistory();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log("API'ye GÖNDERİLEN DATA:", formData);
+
+    const axiosConfig = {
+      headers: {
+        "x-api-key": "reqres-free-v1",
+      },
+    };
+    try {
+      const response = await axios.post(
+        "https://reqres.in/api/pizza",
+        formData,
+        axiosConfig
+      );
+      console.log("APİ cevap", response.data);
+      history.push("/success");
+    } catch (error) {
+      console.error("API hata", error);
     }
   };
+
+  const handleChange = (e) => {
+    const { checked, value, name, type } = e.target;
+    if (type === "checkbox") {
+      if (checked && formData.checkbox.length >= 10) return;
+      if (checked) {
+        setFormData({
+          ...formData,
+          [name]: [...formData[name], value],
+        });
+        setAddPrice(addPrice + 5);
+      } else {
+        setFormData({
+          ...formData,
+          [name]: formData[name].filter((item) => item !== value),
+        });
+        setAddPrice(addPrice > 0 && addPrice - 5);
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  useEffect(() => {
+    const newErrors = {};
+
+    newErrors.name = formData.name.trim().length < 3;
+
+    newErrors.checkbox = formData.checkbox.length < 4;
+
+    newErrors.radio = formData.radio === "";
+
+    newErrors.select = formData.select === "";
+
+    setErrors(newErrors);
+
+    setIsValid(
+      newErrors && Object.values(newErrors).every((err) => err === false)
+    );
+  }, [formData]);
+
+  useEffect(() => {
+    console.log("State güncellendi:", isValid);
+  }, [formData]);
 
   return (
     <div>
       <FormContent />
       <div className="form-wrapper">
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <div className="form-row">
             {/* Radio butonlar */}
             <div className="radio-container">
-              <h3>Boyut Seç</h3>
-              <FormGroup check>
-                <Input name="radio" type="radio" /> <Label check>Küçük</Label>
-              </FormGroup>
-              <FormGroup check>
-                <Input name="radio" type="radio" /> <Label check>Orta</Label>
-              </FormGroup>
-              <FormGroup check>
-                <Input name="radio" type="radio" /> <Label check>Büyük</Label>
-              </FormGroup>
+              <h3>
+                Boyut Seç
+                <AlertStar $visible={errors.radio}>*</AlertStar>
+              </h3>
+
+              {radio.map((value, i) => (
+                <RadioButtons
+                  key={value}
+                  id={i * 4}
+                  onChange={handleChange}
+                  value={value}
+                  checked={formData.radio === value}
+                  errors={errors}
+                />
+              ))}
             </div>
 
             {/* Select box */}
             <div className="select-container">
               <FormGroup>
                 <Label for="exampleSelect">
-                  <h3>Hamur Seç</h3>
+                  <h3>
+                    Hamur Seç
+                    <AlertStar $visible={errors.select}>*</AlertStar>
+                  </h3>
                 </Label>
-                <Input id="exampleSelect" name="select" type="select">
+                <Input
+                  type="select"
+                  name="select"
+                  id="exampleSelect"
+                  value={formData.select}
+                  onChange={handleChange}
+                >
                   <option value="" disabled>
                     Hamur tipi seçin
                   </option>
-                  <option>Kalın</option>
-                  <option>Orta</option>
-                  <option>İnce</option>
+                  <option value="kalin">Kalın</option>
+                  <option value="orta">Orta</option>
+                  <option value="ince">İnce</option>
                 </Input>
               </FormGroup>
             </div>
           </div>
           <div className="ingredients-section">
-            <h3>Ek Malzemeler</h3>
+            <h3>
+              Ek Malzemeler <AlertStar $visible={errors.checkbox}>*</AlertStar>
+            </h3>
             <p>En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
-            <div className="p-3 check-box-container">
+            <div className="p-3 my-4 check-box-container">
               <Row className="gy-3">
-                {options.map((option, i) => (
-                  <Col sm="4" key={option} className="ps-0">
-                    <CheckBoxs
-                      id={i * 2}
-                      option={option}
-                      isChecked={selected.includes(option)}
-                      onChange={handleChange}
-                    />
-                  </Col>
-                ))}
+                {options.map((value, i) => {
+                  return (
+                    <Col sm="4" key={value} className="ps-0">
+                      <CheckBoxs
+                        id={i * 2}
+                        value={value}
+                        checked={formData.checkbox.includes(value)}
+                        onChange={handleChange}
+                      />
+                    </Col>
+                  );
+                })}
               </Row>
             </div>
 
+            <FormGroup>
+              <Label for="exampleName">
+                <h4>İsminiz:</h4>
+              </Label>
+              <Input
+                name="name"
+                onChange={(e) => handleChange(e)}
+                value={formData.name}
+                invalid={errors.name}
+              />
+              {errors.name && (
+                <FormFeedback>İsim girmek zorunludur</FormFeedback>
+              )}
+            </FormGroup>
             <FormGroup>
               <Label for="exampleText">
                 <h3>Ek Malzemeler</h3>
@@ -96,6 +222,8 @@ export default function SiparisForm() {
                 id="exampleText"
                 name="text"
                 style={{ resize: "none" }}
+                onChange={(e) => handleChange(e)}
+                value={formData.text}
                 placeholder="Siparişine eklemek istediğin bir not var mı ..."
                 type="textarea"
               />
@@ -110,10 +238,10 @@ export default function SiparisForm() {
               }}
             />
           </div>
+          <div className="submit-section">
+            <CounterBox price={price} addPrice={addPrice} isDisable={isValid} />
+          </div>
         </Form>
-      </div>
-      <div className="submit-section">
-        <CounterBox />
       </div>
     </div>
   );
