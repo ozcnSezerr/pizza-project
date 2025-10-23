@@ -10,14 +10,14 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route path="/form">
           <FormHeader />
           <SiparisForm />
         </Route>
         <Route path="/success">
           <SuccessPage />
         </Route>
-        <Route path="/main">
+        <Route exact path="/">
           <MainPage />
         </Route>
       </Switch>

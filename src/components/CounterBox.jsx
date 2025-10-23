@@ -34,8 +34,8 @@ const CounterButton = styled.button`
 // Sayı kısmı
 const CounterDisplay = styled.span`
   font-weight: bold;
-  border: 1px solid #bebebe;
-  background-color: #eae9e9;
+  border: 0.8px solid #bebebe;
+  background-color: #ebebebff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,6 +55,7 @@ const OrderButton = styled.button`
   }
 `;
 const SubmitContainer = styled.div`
+  background-color: white;
   border: 1px solid #d9d9d9;
   width: 340px;
   display: flex;

@@ -2,7 +2,11 @@ import styled from "styled-components";
 import Image from "../../images/iteration-1-images/home-banner.png";
 import image from "../assets/logo.svg";
 import { useHistory } from "react-router-dom";
-
+import Navigation from "./NavigationBar";
+import NavigationMiddle from "./NavigationBarMiddle";
+import SliderCards from "./SliderCards";
+import Cards from "./FoodCards";
+import Footer from "./Footer";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,6 +19,7 @@ const Container = styled.div`
   background-position: center;
   background-repeat: no-repeat;
 `;
+
 const ToFormButton = styled.button`
   width: 160px;
   border: none;
@@ -25,7 +30,7 @@ const ToFormButton = styled.button`
 `;
 const Header = styled.h1`
   text-align: center;
-  transform: scale(1.6);
+  transform: scale(1.5);
   font-family: "Roboto Condensed", sans-serif;
   color: white;
 `;
@@ -35,20 +40,48 @@ const Logo = styled.img`
   transform: scale(0.7);
 `;
 
+const SubHeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+`;
+const FirstSubHeader = styled.p`
+  font-family: "satisfy";
+  font-size: 2rem;
+  color: #ce2829;
+  margin-bottom: 0;
+`;
+const SecondSubHeader = styled.p`
+  font-size: 2.8rem;
+  font-weight: bold;
+`;
+
 export default function MainPage() {
   const history = useHistory();
 
   const handleClick = () => {
-    history.push("/");
+    history.push("/form");
   };
 
   return (
-    <Container>
-      <Logo src={image} />
-      <Header>
-        KOD ACIKTIRIR <br /> PİZZA, DOYURUR
-      </Header>
-      <ToFormButton onClick={handleClick}>ACIKTIM</ToFormButton>
-    </Container>
+    <>
+      <Container>
+        <Logo src={image} />
+        <Header>
+          KOD ACIKTIRIR <br /> PİZZA, DOYURUR
+        </Header>
+        <ToFormButton onClick={handleClick}>ACIKTIM</ToFormButton>
+      </Container>
+      <Navigation />
+      <SliderCards onClick={handleClick} />
+      <SubHeaderContainer>
+        <FirstSubHeader>en çopk paketlenen menüler</FirstSubHeader>
+        <SecondSubHeader>Acıktıran Kodlara Doyuran Lezzetler</SecondSubHeader>
+      </SubHeaderContainer>
+      <NavigationMiddle />
+      <Cards />
+      <Footer />
+    </>
   );
 }

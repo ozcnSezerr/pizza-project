@@ -4,6 +4,10 @@
   box-sizing: border-box;
   font-family: "Barlow", sans-serif;
 }
+#root {
+  background-color: rgb(252, 252, 235);
+  display: flow-root;
+}
 .order {
   display: flex;
   justify-content: center;
