@@ -10,6 +10,10 @@ const Container = styled.div`
   gap: 0.5rem;
   justify-content: center;
   transform: scale(0.85);
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const Slider = styled.div`
   position: relative;
@@ -17,6 +21,7 @@ const Slider = styled.div`
 
 const Image = styled.img`
   border-radius: 1rem;
+  width: 100%;
 `;
 const RigthColumn = styled.div`
   display: flex;
@@ -30,6 +35,9 @@ const RightContent = styled.p`
   top: 20%;
   font-weight: 600;
   transform: scale(2);
+  @media (max-width: 500px) {
+    transform: scale(1.8);
+  }
 `;
 
 const LeftContent = styled.p`
@@ -41,6 +49,11 @@ const LeftContent = styled.p`
   line-height: 4rem;
   font-size: 4rem;
   transform: scale(1.2);
+  @media (max-width: 500px) {
+    & + button {
+      top: 70%;
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -57,7 +70,10 @@ const Button = styled.button`
   top: 58%;
   left: 8%;
   position: absolute;
-  cursor: pointer;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export default function SliderCards({ onClick }) {
@@ -70,19 +86,15 @@ export default function SliderCards({ onClick }) {
           <span
             style={{
               display: "inline-block",
-              paddingTop: "0",
               fontWeight: "400",
               fontSize: "1.2rem",
               lineHeight: "1rem",
-              transform: "translateY(-1rem)",
             }}
           >
             Position:Absolute Acı Burger
           </span>
         </LeftContent>
-        <Button onClick={onClick} style={{ transform: "translateY(-1.4rem)" }}>
-          Sipariş Ver
-        </Button>
+        <Button onClick={onClick}>Sipariş Ver</Button>
       </Slider>
       <RigthColumn>
         <Slider>

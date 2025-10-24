@@ -5,7 +5,7 @@
   font-family: "Barlow", sans-serif;
 }
 #root {
-  background-color: rgb(252, 252, 235);
+  /* background-color: rgb(252, 252, 235); */
   display: flow-root;
 }
 .order {
@@ -23,10 +23,12 @@
   width: 80%;
   max-width: 532px;
   margin: 0 auto;
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.6rem;
+  /* background-color: rgb(252, 252, 200); */
 }
 
 .form-content p {
@@ -53,10 +55,6 @@ input[type="checkbox"] {
   width: 80%;
 }
 
-.radio-container .form-check {
-  margin-bottom: 10px;
-}
-
 Form {
   width: 100%;
 }
@@ -72,4 +70,8 @@ Form {
   margin-bottom: 2rem;
   max-width: 532px;
   width: 100%;
+}
+
+.radio-container {
+  width: 140px;
 }

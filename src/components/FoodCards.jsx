@@ -9,10 +9,16 @@ const Container = styled.div`
   margin-bottom: 4rem;
   justify-content: center;
   gap: 1.6rem;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const Card = styled.div`
   box-shadow: 0 2px 4px #dcdbdbff;
   display: flex;
+  width: 340px;
   flex-direction: column;
   background-color: white;
   padding: 2rem;

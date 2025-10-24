@@ -14,6 +14,7 @@ import FormContent from "./FormContent";
 import CheckBoxs from "./CheckBoxs";
 import CounterBox from "./CounterBox";
 import RadioButtons from "./RadioButtons";
+import FormHeader from "./FormHeader";
 import styled from "styled-components";
 import axios from "axios";
 const AlertStar = styled.span`
@@ -129,6 +130,7 @@ export default function SiparisForm() {
 
   return (
     <div>
+      <FormHeader />
       <FormContent />
       <div className="form-wrapper">
         <Form onSubmit={handleSubmit}>
@@ -162,6 +164,11 @@ export default function SiparisForm() {
                   </h3>
                 </Label>
                 <Input
+                  style={{
+                    textAlign: "left",
+                    backgroundColor: "rgb(247, 247, 240, 1)",
+                    paddingRight: "3rem",
+                  }}
                   type="select"
                   name="select"
                   id="exampleSelect"
@@ -169,7 +176,7 @@ export default function SiparisForm() {
                   onChange={handleChange}
                 >
                   <option value="" disabled>
-                    Hamur tipi seçin
+                    ~Hamur tipi seçin~
                   </option>
                   <option value="kalin">Kalın</option>
                   <option value="orta">Orta</option>
@@ -205,6 +212,9 @@ export default function SiparisForm() {
                 <h4>İsminiz:</h4>
               </Label>
               <Input
+                style={{
+                  backgroundColor: "rgb(247, 247, 240, 1)",
+                }}
                 name="name"
                 onChange={(e) => handleChange(e)}
                 value={formData.name}
@@ -221,7 +231,10 @@ export default function SiparisForm() {
               <Input
                 id="exampleText"
                 name="text"
-                style={{ resize: "none" }}
+                style={{
+                  resize: "none",
+                  backgroundColor: "rgb(247, 247, 240, 1)",
+                }}
                 onChange={(e) => handleChange(e)}
                 value={formData.text}
                 placeholder="Siparişine eklemek istediğin bir not var mı ..."

@@ -55,7 +55,7 @@ const OrderButton = styled.button`
   }
 `;
 const SubmitContainer = styled.div`
-  background-color: white;
+  background-color: rgb(247, 247, 240, 1);
   border: 1px solid #d9d9d9;
   width: 340px;
   display: flex;

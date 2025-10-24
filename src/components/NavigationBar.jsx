@@ -12,6 +12,11 @@ const Navigation = styled.nav`
   justify-content: center;
   gap: 3.2rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  @media (max-width: 500px) {
+    display: grid;
+    column-gap: 4rem;
+    grid-template-columns: auto auto;
+  }
 `;
 const Element = styled.li`
   background-color: white;
@@ -20,6 +25,7 @@ const Element = styled.li`
   align-items: center;
   gap: 0.8rem;
   cursor: pointer;
+  width: fit-content;
 `;
 
 const Text = styled.span`

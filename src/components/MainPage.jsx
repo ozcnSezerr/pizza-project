@@ -53,8 +53,12 @@ const FirstSubHeader = styled.p`
   margin-bottom: 0;
 `;
 const SecondSubHeader = styled.p`
+  text-align: center;
   font-size: 2.8rem;
   font-weight: bold;
+  @media (max-width: 500px) {
+    width: 340px;
+  }
 `;
 
 export default function MainPage() {

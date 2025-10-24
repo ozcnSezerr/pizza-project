@@ -10,6 +10,18 @@ const Navigation = styled.nav`
   display: flex;
   justify-content: center;
   gap: 1.8rem;
+
+  @media (max-width: 500px) {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    & > li:nth-child(odd) {
+      justify-self: start;
+    }
+    & > li:nth-child(even) {
+      justify-self: end;
+    }
+  }
 `;
 const Element = styled.li`
   border-radius: 34px;
@@ -21,6 +33,7 @@ const Element = styled.li`
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  width: fit-content;
 `;
 
 const Text = styled.span`
@@ -37,23 +50,23 @@ const Image = styled.img`
 export default function NavigationBar() {
   return (
     <Navigation className="py-3">
-      <Element>
-        <Image src={img1} alt="" /> <Text>YENİ! Kore</Text>
+      <Element className="left">
+        <Image src={img1} alt="" /> <Text>Ramen</Text>
       </Element>
       <Element>
         <Image src={img2} alt="" /> <Text>Pizza</Text>
       </Element>
       <Element>
-        <Image src={img3} alt="" /> <Text>Hamburger</Text>
+        <Image src={img3} alt="" /> <Text>Burger</Text>
       </Element>
       <Element>
-        <Image src={img4} alt="" /> <Text>Kızartmalar</Text>
+        <Image src={img4} alt="" /> <Text>French fries</Text>
       </Element>
       <Element>
         <Image src={img5} alt="" /> <Text>Fast Food</Text>
       </Element>
       <Element>
-        <Image src={img6} alt="" /> <Text>Gazlı İçecekler</Text>
+        <Image src={img6} alt="" /> <Text>Soft drinks</Text>
       </Element>
     </Navigation>
   );

@@ -1,39 +1,41 @@
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
+import formbanner from "../../images/iteration-2-images/pictures/form-banner.png";
 
-const HeaderWrapper = styled.div`
-  position: relative;
+const Header = styled.div`
+  // position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
-  padding-top: 40px;
+  padding-top: 2.5rem;
   width: 100%;
-  height: 180px;
+  height: 100px;
   background-color: #ce2829;
-  margin-bottom: 2.5rem;
 `;
-
+const Banner = styled.img`
+  align-self: center;
+  margin-top: -3rem;
+  z-index: 0;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  background-color: rgb(247, 247, 240, 1);
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 2.5rem;
+`;
 const Logo = styled.img`
   width: 360px;
   height: 46px;
 `;
 
-const HeaderText = styled.p`
-  position: absolute;
-  font-weight: 500;
-  left: 35%;
-  top: 136px;
-  text-align: center;
-  color: white;
-`;
-
 export default function FormHeader() {
   return (
-    <HeaderWrapper>
-      <Logo src={logo} alt="Logo" />
-      <HeaderText>
-        <span style={{ color: "#dedbdbff", fontWeight: "300" }}>Anasayfa</span>-
-        Sipariş Oluştur
-      </HeaderText>
-    </HeaderWrapper>
+    <Wrapper>
+      <Header>
+        <Logo src={logo} alt="Logo" />
+      </Header>
+      <Banner src={formbanner} />
+    </Wrapper>
   );
 }
