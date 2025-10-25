@@ -2,21 +2,37 @@ import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import formbanner from "../../images/iteration-2-images/pictures/form-banner.png";
 
-const Header = styled.div`
+const HeaderContainer = styled.div`
   // position: relative;
   z-index: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding-top: 2.5rem;
   width: 100%;
-  height: 100px;
+  height: 130px;
   background-color: #ce2829;
+  gap: 1rem;
 `;
-const Banner = styled.img`
+const PizzaBanner = styled.img`
   align-self: center;
   margin-top: -3rem;
   z-index: 0;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
+const HeaderText = styled.p`
+  display: none;
+  color: white;
+  margin-left: -220px;
+  padding-bottom: 1rem;
+  @media (max-width: 500px) {
+    display: block;
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   background-color: rgb(247, 247, 240, 1);
@@ -32,10 +48,16 @@ const Logo = styled.img`
 export default function FormHeader() {
   return (
     <Wrapper>
-      <Header>
+      <HeaderContainer>
         <Logo src={logo} alt="Logo" />
-      </Header>
-      <Banner src={formbanner} />
+        <HeaderText>
+          <span style={{ color: "#cfcfcfff", fontWeight: "500" }}>
+            Anasayfa{" "}
+          </span>
+          - Sipariş Oluştur
+        </HeaderText>
+      </HeaderContainer>
+      <PizzaBanner src={formbanner} />
     </Wrapper>
   );
 }

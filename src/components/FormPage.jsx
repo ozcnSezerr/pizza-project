@@ -17,6 +17,23 @@ import RadioButtons from "./RadioButtons";
 import FormHeader from "./FormHeader";
 import styled from "styled-components";
 import axios from "axios";
+const SelectBox = styled.select`
+  padding: 0.5rem 1rem;
+  padding-right: 3rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  &:focus {
+    box-shadow: 0 0 5px 3px rgba(253, 201, 19, 0.3);
+    background-color: #fdc91333;
+    // border-color: rgba(253, 201, 19, 1);
+  }
+  &:selected {
+    background-color: #f9f9f9;
+    border-color: rgba(253, 201, 19, 1);
+  }
+`;
+
 const AlertStar = styled.span`
   color: red;
   visibility: ${({ $visible }) => ($visible ? "visible" : "hidden")};
@@ -25,7 +42,7 @@ const AlertStar = styled.span`
 const options = [
   "Pepperoni",
   "Sosis",
-  "Kanada Jambonu",
+  "Jambon",
   "Tavuk Izgara",
   "Soğan",
   "Domates",
@@ -39,7 +56,7 @@ const options = [
   "Avokado",
 ];
 
-const radio = ["Küçük", "Orta", "Büyük"];
+const radio = ["S", "M", "L"];
 
 export default function SiparisForm() {
   const [formData, setFormData] = useState({
@@ -80,7 +97,7 @@ export default function SiparisForm() {
       console.log("APİ cevap", response.data);
       history.push("/success");
     } catch (error) {
-      console.error("API hata", error);
+      console.error("Bağlantı hatası", error);
     }
   };
 
@@ -141,17 +158,18 @@ export default function SiparisForm() {
                 Boyut Seç
                 <AlertStar $visible={errors.radio}>*</AlertStar>
               </h3>
-
-              {radio.map((value, i) => (
-                <RadioButtons
-                  key={value}
-                  id={i * 4}
-                  onChange={handleChange}
-                  value={value}
-                  checked={formData.radio === value}
-                  errors={errors}
-                />
-              ))}
+              <div className="radios">
+                {radio.map((value, i) => (
+                  <RadioButtons
+                    key={value}
+                    id={i * 4}
+                    onChange={handleChange}
+                    value={value}
+                    checked={formData.radio === value}
+                    errors={errors}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Select box */}
@@ -163,12 +181,7 @@ export default function SiparisForm() {
                     <AlertStar $visible={errors.select}>*</AlertStar>
                   </h3>
                 </Label>
-                <Input
-                  style={{
-                    textAlign: "left",
-                    backgroundColor: "rgb(247, 247, 240, 1)",
-                    paddingRight: "3rem",
-                  }}
+                <SelectBox
                   type="select"
                   name="select"
                   id="exampleSelect"
@@ -181,7 +194,7 @@ export default function SiparisForm() {
                   <option value="kalin">Kalın</option>
                   <option value="orta">Orta</option>
                   <option value="ince">İnce</option>
-                </Input>
+                </SelectBox>
               </FormGroup>
             </div>
           </div>
@@ -190,21 +203,17 @@ export default function SiparisForm() {
               Ek Malzemeler <AlertStar $visible={errors.checkbox}>*</AlertStar>
             </h3>
             <p>En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
-            <div className="p-3 my-4 check-box-container">
-              <Row className="gy-3">
-                {options.map((value, i) => {
-                  return (
-                    <Col sm="4" key={value} className="ps-0">
-                      <CheckBoxs
-                        id={i * 2}
-                        value={value}
-                        checked={formData.checkbox.includes(value)}
-                        onChange={handleChange}
-                      />
-                    </Col>
-                  );
-                })}
-              </Row>
+            <div className="py-3 my-4 check-box-container">
+              {options.map((value, i) => {
+                return (
+                  <CheckBoxs
+                    id={i * 2}
+                    value={value}
+                    checked={formData.checkbox.includes(value)}
+                    onChange={handleChange}
+                  />
+                );
+              })}
             </div>
 
             <FormGroup>
@@ -251,9 +260,8 @@ export default function SiparisForm() {
               }}
             />
           </div>
-          <div className="submit-section">
-            <CounterBox price={price} addPrice={addPrice} isDisable={isValid} />
-          </div>
+
+          <CounterBox price={price} addPrice={addPrice} isDisable={isValid} />
         </Form>
       </div>
     </div>

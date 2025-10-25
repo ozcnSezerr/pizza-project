@@ -1,11 +1,21 @@
+import styled from "styled-components";
+
+const SmallNav = styled.p`
+  font-weight: 500;
+  color: #ce2829;
+  @media (max-width: 500px) {
+    display: none;
+  }
+`;
+
 export default function () {
   return (
     <div style={{ width: "100%", backgroundColor: "rgb(247, 247, 240, 1)" }}>
       <div className="form-content">
-        <p style={{ color: "#CE2829", fontWeight: "500" }}>
+        <SmallNav>
           <span style={{ color: "#5F5F5F", fontWeight: "500" }}>Anasayfa </span>
           - Sipariş Oluştur
-        </p>
+        </SmallNav>
         <h2>Position Absolute Acı Pizza</h2>
         <div className="form-prices">
           <span
@@ -18,7 +28,7 @@ export default function () {
           >
             85.50₺
           </span>
-          <span style={{ transform: "translate(130px)" }}>4.9</span>
+          <span style={{ paddingLeft: "9rem" }}>4.9</span>
           <span>(200)</span>
         </div>
         <p>
