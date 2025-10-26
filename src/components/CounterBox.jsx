@@ -105,14 +105,16 @@ export default function CounterBox({ price, addPrice, isDisable }) {
     <MainContainer>
       <CounterContainer>
         <CounterButton
+          data-testid="count-plus"
           className="border rounded-start"
           type="button"
           onClick={() => setCount(count + 1)}
         >
           +
         </CounterButton>
-        <CounterDisplay>{count}</CounterDisplay>
+        <CounterDisplay data-testid="count-display">{count}</CounterDisplay>
         <CounterButton
+          data-testid="count-minus"
           className="border rounded-end"
           type="button"
           onClick={() => setCount(count > 0 ? count - 1 : 0)}

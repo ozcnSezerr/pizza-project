@@ -75,7 +75,9 @@ export default function MainPage() {
         <Header>
           KOD ACIKTIRIR <br /> PİZZA, DOYURUR
         </Header>
-        <ToFormButton onClick={handleClick}>ACIKTIM</ToFormButton>
+        <ToFormButton data-testid="order-btn" onClick={handleClick}>
+          ACIKTIM
+        </ToFormButton>
       </Container>
       <Navigation />
       <SliderCards onClick={handleClick} />

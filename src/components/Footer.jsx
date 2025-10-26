@@ -103,7 +103,7 @@ export default function Footer() {
       <hr style={{ border: "1px solid #FFF", width: "100%" }} />
       <CopyRights style={{ width: "100%" }}>
         <p>&copy; 2023 Teknolojik Yemekler. </p>
-        <i class="fa-brands fa-twitter"></i>
+        <i className="fa-brands fa-twitter"></i>
       </CopyRights>
     </Container>
   );

@@ -207,6 +207,7 @@ export default function SiparisForm() {
               {options.map((value, i) => {
                 return (
                   <CheckBoxs
+                    key={value}
                     id={i * 2}
                     value={value}
                     checked={formData.checkbox.includes(value)}
@@ -230,7 +231,9 @@ export default function SiparisForm() {
                 invalid={errors.name}
               />
               {errors.name && (
-                <FormFeedback>İsim girmek zorunludur</FormFeedback>
+                <FormFeedback data-testid="name-feedback">
+                  İsim girmek zorunludur
+                </FormFeedback>
               )}
             </FormGroup>
             <FormGroup>

@@ -94,19 +94,25 @@ export default function SliderCards({ onClick }) {
             Position:Absolute Acı Burger
           </span>
         </LeftContent>
-        <Button onClick={onClick}>Sipariş Ver</Button>
+        <Button data-testid="slider-order-btn" onClick={onClick}>
+          Sipariş Ver
+        </Button>
       </Slider>
       <RigthColumn>
         <Slider>
           <Image src={slider2} alt="2" />
-          <Button onClick={onClick}>Sipariş Ver </Button>
+          <Button data-testid="slider-order-btn" onClick={onClick}>
+            Sipariş Ver{" "}
+          </Button>
           <RightContent style={{ color: "white" }}>
             Hackathlon <br /> Burger Menü
           </RightContent>
         </Slider>
         <Slider>
           <Image src={slider3} alt="3" />
-          <Button onClick={onClick}>Sipariş Ver </Button>
+          <Button data-testid="slider-order-btn" onClick={onClick}>
+            Sipariş Ver{" "}
+          </Button>
           <RightContent style={{ color: "black" }}>
             <span style={{ color: "#ce2829" }}>Çoooook</span> hızlı <br /> npm
             gibi kurye
